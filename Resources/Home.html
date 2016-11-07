@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>CTFastrak Routes</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      // This example creates a 2-pixel-wide red polyline showing the path of William
+      // Kingsford Smith's first trans-Pacific flight between Oakland, CA, and
+      // Brisbane, Australia.
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 14,
+          center: {lat: 41.750632, lng: -72.708970},
+          mapTypeId: 'terrain'
+        });
+
+        var route101 = [
+          {lat: 41.668823, lng: -72.779694},
+          {lat: 41.687995, lng: -72.758115},
+          {lat: 41.696500, lng: -72.753538},
+          {lat: 41.730701, lng: -72.724853},
+	  {lat: 41.741607, lng: -72.716212},
+	  {lat: 41.750632, lng: -72.708970},
+          {lat: 41.750639, lng: -72.708979},
+          {lat: 41.765088, lng: -72.694810},
+	  {lat: 41.765337, lng: -72.691540},
+	  {lat: 41.765682, lng: -72.689175},
+	  {lat: 41.765890, lng: -72.685276},
+          {lat: 41.766832, lng: -72.682890}, 
+
+          {lat: 41.757117, lng: -72.704146}
+        ];
+        var route101path = new google.maps.Polyline({
+          path: route101,
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        route101path.setMap(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClp2ZAGI1GuJuJeBFoQRZdzAxejwtDnrQ&callback=initMap">
+    </script>
+  </body>
+</html>
