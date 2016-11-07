@@ -1,0 +1,105 @@
+<html>
+<head>
+    <title>
+        CT Transit Fastrak Application
+    </title>
+<script type="text/javascript" src="Scripts/jquery-3.1.0.min.js"> </script>
+<script type="text/javascript" src="Scripts/bootstrap.js"> </script>
+<script type="text/javascript" src="Scripts/CommonFunctions.js"> </script>
+<script type="text/javascript" src="Scripts/SearchLocations.js"> </script>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+<!-- ToDo: Change the API key -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHEujlbA2PJPdS8Uyg5hcKn0e-DRv5g7c&libraries=places&callback=initGoogleComponents"></script>
+<style>
+	.searchclear {
+		position: absolute;
+		right: 20px;
+		top: 0;
+		bottom: 0;
+		height: 14px;
+		margin: auto;
+		font-size: 14px;
+		cursor: pointer;	
+		z-index:99;
+	}
+	.currentLocation {
+		position: absolute;
+		right: -10px;
+		top: 0;
+		bottom: 0;
+		height: 14px;
+		margin: auto;
+		font-size: 14px;
+		cursor: pointer;			
+		z-index:100;
+	}			
+	.map {
+		height: 80%;
+		width: 80%;
+		float:right;
+   }
+   
+   .mapDirections{
+	   	height: 80%;
+		width: 20%;
+		float: left;
+		overflow-y:scroll;
+   }
+   
+   .locationTextBox{
+	   font-size: 12px;
+   }
+</style>
+</head>
+<body>
+	<div class="row-fluid">
+		<div class="span12 panel panel-info">
+		   <!--  <div class="panel-heading">
+			<strong class='lead text-center col-md-offset-5'>CT Fastrak Search Application</strong></div> -->
+			<div class="panel-body">
+			<!--	<form name="userCreationForm" 
+					  class="form-horizontal" role="form" novalidate> -->
+					<div class="form-group form-horizontal">
+						<label for="inputFromLocation" class="col-sm-1 control-label">From</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control locationTextBox"
+							id="inputFromLocation" 
+							name="inputFromLocation"
+							placeholder="From"
+							autocomplete="off"/>
+							
+							 <span id="clearFromLocation" class="glyphicon glyphicon-remove-circle searchclear"></span>
+							<span id="currentFromLocation" class="glyphicon glyphicon-map-marker currentLocation" 
+							title="Current Location"></span>
+						</div>
+						
+						<label for="inputToLocation" class="col-sm-1 control-label">To</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control locationTextBox"
+							id="inputToLocation" 
+							name="inputToLocation"
+							placeholder="To"
+							autocomplete="off"/>
+						<span id="clearToLocation" class="glyphicon glyphicon-remove-circle col-sm-1 searchclear"></span>
+						<span id="currentToLocation" class="glyphicon glyphicon-map-marker col-sm-1 currentLocation" title="Current Location"></span>
+						</div>
+						
+						<button id="btnSubmit"  class="btn btn-md btn-primary col-md-offset-1">Search</button>
+					</div>
+					
+				<!-- </form> -->
+			</div>
+		</div>			
+	</div>
+
+	<div class="row-fluid">
+		<div id="divDirections" class="col-md-2 mapDirections">
+			Directions will be displayed here
+		</div>
+		<div id="divTransitMap" class="col-md-10 map">	
+		</div>	
+	</div>
+</body>
+</html>
