@@ -188,8 +188,8 @@ _usersCurrentLocation.coords.longitude,_fastrakBusStops);
 
 function loadKmlLayer(src, map) {
     var kmlLayer = new google.maps.KmlLayer(src, {
-      suppressInfoWindows: true,
-      preserveViewport: false,
+      suppressInfoWindows: false,
+      preserveViewport: true,
       map: map
     });
 
@@ -251,7 +251,7 @@ function initGoogleComponents() {
 			map: _map,
 			url: 'https://drive.google.com/uc?export=download&id=0B23t31esDVFRcVBaUGk5N3dRbVU',
 			preserveViewport: true,
-			suppressInfoWindows: true
+			suppressInfoWindows: false
 		});
 
 	  debugger;
