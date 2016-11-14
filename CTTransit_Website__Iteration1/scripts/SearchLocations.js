@@ -249,7 +249,7 @@ function initGoogleComponents() {
 	// ToDo: Change the URL
 	var ctfastrak = new google.maps.KmlLayer({
 			map: _map,
-			url: 'https://drive.google.com/uc?export=download&id=0B23t31esDVFRcVBaUGk5N3dRbVU',
+			url: 'https://drive.google.com/uc?export=download&id=0B23t31esDVFRcXU4dzlXQzJaRUk',
 			preserveViewport: true,
 			suppressInfoWindows: false
 		});
