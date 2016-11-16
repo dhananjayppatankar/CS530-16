@@ -511,7 +511,7 @@ https://github.com/google/transitfeed/wiki/ScheduleViewer
                     dest='manual_entry',
                     help='disable interactive prompts')
   parser.set_defaults(port=8888,
-                      host='10.0.0.63',
+                      host='127.0.0.1',
                       file_dir=FindDefaultFileDir(),
                       manual_entry=True)
   (options, args) = parser.parse_args()
@@ -543,7 +543,7 @@ https://github.com/google/transitfeed/wiki/ScheduleViewer
   print '(this may take a few minutes for larger cities)'
   schedule.Load(options.feed_filename)
 
-  server = StoppableHTTPServer(server_address=('0.0.0.0', options.port),
+  server = StoppableHTTPServer(server_address=('127.0.0.1', options.port),
                                RequestHandlerClass=RequestHandlerClass)
   server.key = options.key
   server.schedule = schedule
