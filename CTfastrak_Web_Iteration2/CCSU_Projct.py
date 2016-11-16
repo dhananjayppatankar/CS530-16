@@ -510,7 +510,7 @@ https://github.com/google/transitfeed/wiki/ScheduleViewer
   parser.add_option('-n', '--noprompt', action='store_false',
                     dest='manual_entry',
                     help='disable interactive prompts')
-  parser.set_defaults(port=80,
+  parser.set_defaults(port=8888,
                       host='10.0.0.63',
                       file_dir=FindDefaultFileDir(),
                       manual_entry=True)
