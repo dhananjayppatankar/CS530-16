@@ -204,10 +204,10 @@ function initGoogleComponents() {
 	_map = new google.maps.Map(document.getElementById('divTransitMap'), {
 			// ToDo: Center must be users current location
 			center: {
-				lat: 41.6714820,
-				lng: -72.766231
+				lat: 41.731969,
+				lng: -72.740894
 			},
-			zoom: 10
+			zoom: 11
 		});
 
 	

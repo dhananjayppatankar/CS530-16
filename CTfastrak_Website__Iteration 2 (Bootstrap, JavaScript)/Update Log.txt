@@ -1,0 +1,4 @@
+
+-->(Sachin)Added Live_vehicle_Location.js using javascript and AJAX.
+   Which gets real time bus location from http://65.213.12.244/realtimefeed/vehicle/vehiclepositions.json .
+   Using Lat/Lang it shows real time bus location on map. Page is getting refreshed after few seconds and bus location changes accordance.
