@@ -23,7 +23,7 @@ xhr.onload = function () {
 				position: {lat: feed["entity"][i].vehicle.position.latitude, lng: feed["entity"][i].vehicle.position.longitude},
 				map: _map,
 				title: feed["entity"][i].id,
-				icon: 'Bus_Icon.png'});
+				icon: 'Bus_Postion_Icon.png'});
 
 		busArray.push(marker);
 		}
