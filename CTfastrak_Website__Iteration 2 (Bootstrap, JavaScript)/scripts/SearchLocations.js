@@ -132,6 +132,7 @@ var _fastrakBusStops = [{
 var _fromLocationAutoComplete;
 var _toLocationAutoComplete;
 var _usersCurrentLocation;
+var _findLocationAutoComplete;
 
 function fillInAddress() {
 	// Get the place details from the autocomplete object.
@@ -147,8 +148,78 @@ function initGoogleAutoComplete() {
 			types: ['geocode']
 		});
 
+	_findLocationAutoComplete = new google.maps.places.Autocomplete((document.getElementById('inputFindLocation')), {
+			types: ['geocode']
+		});
+		
 	_fromLocationAutoComplete.addListener('place_changed', fillInAddress);
 	_toLocationAutoComplete.addListener('place_changed', fillInAddress);
+	_findLocationAutoComplete.addListener('place_changed', fillInAddress);
+	
+	
+	 var input = document.getElementById('inputFindLocation');
+	 var searchBox = new google.maps.places.SearchBox(input);
+     //_map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+	
+	
+	        // Bias the SearchBox results towards current map's viewport.
+        _map.addListener('bounds_changed', function() {
+          searchBox.setBounds(_map.getBounds());
+        });
+	        var markers = [];
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+         searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+			
+          if (places.length == 0) {
+            return;
+          }
+
+          // Clear out the old markers.
+          markers.forEach(function(marker) {
+            marker.setMap(null);
+          });
+          markers = [];
+
+          // For each place, get the icon, name and location.
+          var bounds = new google.maps.LatLngBounds();
+		  
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(50, 50)
+            };
+
+
+			
+            // Create a marker for each place.
+            markers.push(new google.maps.Marker({
+              map: _map,
+              icon: icon,
+              title: place.name,
+              position: place.geometry.location
+            }));
+
+            if (place.geometry.viewport) {
+              // Only geocodes have viewport.
+              bounds.union(place.geometry.viewport);
+            } else {
+              bounds.extend(place.geometry.location);
+            }
+          });
+          _map.fitBounds(bounds);
+        });
+	
+	 
+	
 }
 
 $(function () {
@@ -159,6 +230,10 @@ $(function () {
 
 	$("#clearToLocation").click(function () {
 		$("#inputToLocation").val('');
+	});
+	
+	$("#clearFindLocation").click(function () {
+		$("#inputFindLocation").val('');
 	});
 
 	$("#currentFromLocation, #currentToLocation").click(function () {
