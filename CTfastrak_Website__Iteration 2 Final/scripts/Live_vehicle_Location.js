@@ -1,5 +1,6 @@
 var busArray = [];
 var fastrakRoutes = ["8336", "8473", "8337", "8474", "8339", "8476", "8340", "8477", "8341", "8478", "8342", "8479", "8343", "8480", "8344", "8481"]; 
+var routshortname = ["101-Hartford/New Britain", "101-Hartford/New Britain", "102-Hartford/New Britain/Bristol", "102-Hartford/New Britain/Bristol", "121-MCC/Hartford/UConn Health", "121-MCC/Hartford/UConn Health", "128-Hartford/Westfarms/New Britain via Stanley Street", "128-Hartford/Westfarms/New Britain via Stanley Street", "140-CCSU Shuttle", "140-CCSU Shuttle", "144-Wethersfield/Westfarms via Newington Center and Brittany Farms", "144-Wethersfield/Westfarms via Newington Center and Brittany Farms", "153-Flatbush/Copaco via West Hartford Center", "153-Flatbush/Copaco via West Hartford Center", "161-St. Francis Hospital/Hartford Hospital via Capitol Avenue", "161-St. Francis Hospital/Hartford Hospital via Capitol Avenue"]; 
 
 function getBusLocations(){
 
@@ -20,13 +21,14 @@ xhr.onload = function () {
   busArray = [];
 
 	for(i=0; i < Object.keys(feed["entity"]).length;i++){
-			
+
 		var isfastrakroutes = isInArray(feed["entity"][i].vehicle.trip.route_id, fastrakRoutes);		
 		if (isfastrakroutes) {
+			var routeindex = fastrakRoutes.indexOf(feed["entity"][i].vehicle.trip.route_id);
 			var marker = new google.maps.Marker({
 				position: {lat: feed["entity"][i].vehicle.position.latitude, lng: feed["entity"][i].vehicle.position.longitude},
 				map: _map,
-				title: feed["entity"][i].id,
+				title: routshortname[routeindex],
 				icon: 'Bus_Postion_Icon.png'});
 
 			busArray.push(marker);
