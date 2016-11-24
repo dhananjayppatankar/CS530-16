@@ -324,7 +324,7 @@ function initGoogleComponents() {
 	// ToDo: Change the URL
 	var ctfastrak = new google.maps.KmlLayer({
 			map: _map,
-			url: 'https://drive.google.com/uc?export=download&id=0B23t31esDVFRcXU4dzlXQzJaRUk',
+			url: 'https://drive.google.com/uc?export=download&id=0BzSh5RLL0GhUNHZ0ZFhKWU9yZWM',
 			preserveViewport: true,
 			suppressInfoWindows: false
 		});
