@@ -5,9 +5,10 @@
     </title>
 <script type="text/javascript" src="Scripts/jquery-3.1.0.min.js"> </script>
 <script type="text/javascript" src="Scripts/bootstrap.js"> </script>
+<script type="text/javascript" src="Scripts/bootstrap-dropdown.js"> </script>
 <script type="text/javascript" src="Scripts/CommonFunctions.js"> </script>
 <script type="text/javascript" src="Scripts/SearchLocations.js"> </script>
-<script type="text/javascript" src="Scripts/Live_vehicle_Location.js"> </script>
+<script type="text/javascript" src="Scripts/getschd.js"> </script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
 <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
@@ -52,6 +53,46 @@
    .locationTextBox{
 	   font-size: 12px;
    }
+
+ 
+  .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer; 
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #4CAF50;
+}
+
+.dropdown {
+	 position: relative;
+    display: inline-grid;
+}
+
+.dropdown-content {
+    display: none;
+    /*position: absolute; */
+    background-color: #f9f9f9 ; 
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #f1f1f1}
+
+.show {display:block;} 
+
 </style>
 </head>
 <body>
@@ -87,31 +128,81 @@
 						<span id="currentToLocation" class="glyphicon glyphicon-map-marker col-sm-1 currentLocation" title="Current Location"></span>
 						</div>
 						
-						<button id="btnSubmit"  class="btn btn-md btn-primary col-md-offset-1">Search</button>
-						<button id="btnSubmit"  class="btn btn-md btn-primary col-md-offset-1">Get Schedules</button>
-					</div>
-					
-					<div class="form-group form-horizontal">
+		
+				
+						<button id="btnSubmit"  class="btn btn-primary col-sm-offset-1">Search</button> 
+					<!--	<button onclick="myFunction()" id="btnSubmit"  class="dropbtn btn btn-primary col-md-offset-1">Get Schedules </button>
+						<div id="myDropdown" class="dropdown-content">
+    					<a href="#home">Home</a>
+    					<a href="#about">About</a>
+    					<a href="#contact">Contact</a>
+						</div> type="button" -->         
+					 <!--<div class="btn-group"> -->
+ 						 <!-- <button id="btnSubmit"  class="btn btn-primary col-sm-offset-1 dropdown-toggle" data-toggle="dropdown" >
+						    Get Schedules <span class='caret' /span>
+						   </button> 	
+  									<ul class="dropdown-menu">
+										    <li><a class="dropdown-item" href="https://www.cttransit.com/sites/default/files/schedules/F_102_WkdySched.pdf">102</a>
+										    </li>
+										    <li><a class="dropdown-item" href="#">101</a></li>
+										    <li><a class="dropdown-item" href="#">144</a></li> 
+ 									</ul> 
+-->
+
+<!-- Example single danger button -->
+<div class="btn-group">
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Get Schedules <span class='caret' /span>
+  </button>
+  <div class="dropdown-menu">
+   
+    <li><a class="dropdown-item" href="https://www.cttransit.com/sites/default/files/schedules/F_101_Wkdysched_0.pdf">101</a> </li>	
+    <li><a class="dropdown-item" href="https://www.cttransit.com/sites/default/files/schedules/F_102_WkdySched.pdf">102</a></li>				   
+    <li><a class="dropdown-item" href="https://www.cttransit.com/sites/default/files/2016-04/F_121_WkdySched.pdf">121</a> </li>	
+    <li><a class="dropdown-item" href="https://www.cttransit.com/sites/default/files/schedules/F_128_WkdySched_0.pdf">128</a></li>	
+     <li><a class="dropdown-item" href="https://www.cttransit.com/sites/default/files/2016-05/F_140_WkdySched.pdf">140</a> </li>	
+    <li><a class="dropdown-item" href="https://www.cttransit.com/sites/default/files/2016-05/F_144_WkdySched.pdf">144</a></li>	
+    <li><a class="dropdown-item" href="https://www.cttransit.com/sites/default/files/2016-05/F_153_WkdySched.pdf">153</a> </li>	
+    <li><a class="dropdown-item" href="https://www.cttransit.com/sites/default/files/schedules/F_161_WkdySched.pdf">161</a></li>
+  </div>
+</div>
+
+
+
+  							</div> 	
+	<!--				</div>
+			</div>	
+		</div>		-->		
+<!--This is for Find Directions Tab display -->
+	<!--<div class="row-fluid">
+		<div class="span12 panel panel-info">
+		   <!--  <div class="panel-heading">
+			<strong class='lead text-center col-md-offset-5'>CT Fastrak Search Application</strong></div> -->
+		<!--<div class="panel-body"> 
+			<div class="form-group form-horizontal"> --> 
 						<label for="inputFindLocation" class="col-sm-1 control-label">Find Location</label>
-						<div class="col-sm-3">
-							<input type="text" class="form-control locationTextBox"
-							id="inputFindLocation" 
-							name="inputFindLocation"
-							placeholder="Enter Location Name"
-							autocomplete="off"/>
-							
-							 <span id="clearFindLocation" class="glyphicon glyphicon-remove-circle searchclear"></span>
-							<span id="currentFromLocation" class="glyphicon glyphicon-map-marker currentLocation" 
-							title="Current Location"></span>
-						</div>
+							<div class="col-sm-3">
+								<input type="text" class="form-control locationTextBox"
+								id="inputFindLocation" 
+								name="inputFindLocation"
+								placeholder="Enter Location Name"
+								autocomplete="off"/>
+								
+								 <span id="clearFindLocation" class="glyphicon glyphicon-remove-circle searchclear"></span>
+								<span id="currentFromLocation" class="glyphicon glyphicon-map-marker currentLocation" 
+								title="Current Location"></span>
+							</div>
 					
-					</div>
+			</div>  		
+						  						
 					
 				<!-- </form> -->
-			</div>
+				</div>
 		</div>			
 	</div>
 
+
+<!--This is for Directions display -->
 	<div class="row-fluid">
 		<div id="divDirections" class="col-md-2 mapDirections">
 			Directions will be displayed here
@@ -119,5 +210,11 @@
 		<div id="divTransitMap" class="col-md-10 map">	
 		</div>	
 	</div>
+
+    	
+				
+				
+<!--This is for Directions display -->
+
 </body>
 </html>
