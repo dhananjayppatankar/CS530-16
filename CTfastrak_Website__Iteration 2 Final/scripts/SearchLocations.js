@@ -241,7 +241,7 @@ $(function () {
 	});
 
 	$("#btnSubmit").click(function(){
-		var nearestBusStop = calculateClosestStop(_usersCurrentLocation.coords.latitude,
+		/*var nearestBusStop = calculateClosestStop(_usersCurrentLocation.coords.latitude,
 _usersCurrentLocation.coords.longitude,_fastrakBusStops);
 
 		console.log(nearestBusStop);
@@ -250,14 +250,14 @@ _usersCurrentLocation.coords.longitude,_fastrakBusStops);
 			_usersCurrentLocation.coords.longitude,
 			nearestBusStop.stopLat,
 			nearestBusStop.stopLan);
-		/*
+		*/
 		displayBusRouteOnMap(
 		_fromLocationAutoComplete.getPlace().geometry.location.lat(),
 		_fromLocationAutoComplete.getPlace().geometry.location.lng(),
 		_toLocationAutoComplete.getPlace().geometry.location.lat(),
 		_toLocationAutoComplete.getPlace().geometry.location.lng()
 		);
-		*/
+		
 	});
 });
 

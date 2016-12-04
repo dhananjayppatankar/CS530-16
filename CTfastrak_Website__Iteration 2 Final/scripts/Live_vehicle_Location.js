@@ -34,6 +34,12 @@ xhr.onload = function () {
 			busArray.push(marker);
 			}
 		}
+displayBusRouteOnMap(
+		_fromLocationAutoComplete.getPlace().geometry.location.lat(),
+		_fromLocationAutoComplete.getPlace().geometry.location.lng(),
+		_toLocationAutoComplete.getPlace().geometry.location.lat(),
+		_toLocationAutoComplete.getPlace().geometry.location.lng()
+		);
 }
 xhr.send()
 }
