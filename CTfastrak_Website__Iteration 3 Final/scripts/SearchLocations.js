@@ -403,7 +403,7 @@ function initGoogleComponents() {
 			preserveViewport: true,
 			suppressInfoWindows: true
 		});
-   
+         initGoogleAutoComplete();
 	  //debugger;
 		//ctfastrak.addListener('click', function(kmlEvent){
 		                         //  document.getElementById('divDirections').innerHTML = ""
