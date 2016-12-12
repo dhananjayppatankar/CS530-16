@@ -1,132 +1,205 @@
 var _map;
 var _displayDirections;
 var _directionService;
-var _fastrakBusStops = [{
-		id: "12283",
-		name: "East Main St Station Platform A",
-		stopLat: "41.6714820",
-		stopLan: "-72.766231"
-	}, {
-		id: "12284",
-		name: "East St. Station Platform A",
-		stopLat: "41.6879390",
-		stopLan: "-72.758109"
-	}, {
-		id: "12285",
-		name: "Cedar St Station Platform A",
-		stopLat: "41.6963630",
-		stopLan: "-72.753477"
-	}, {
-		id: "12286",
-		name: "Newington Junction Station Platform A",
-		stopLat: "41.7164150",
-		stopLan: "-72.736083"
-	}, {
-		id: "12288",
-		name: "Flatbush Ave Station Platform A",
-		stopLat: "41.7417090",
-		stopLan: "-72.716480"
-	}, {
-		id: "12289",
-		name: "Kane St Station Platform A",
-		stopLat: "41.7504160",
-		stopLan: "-72.708981"
-	}, {
-		id: "12290",
-		name: "Park St Station Platform A",
-		stopLat: "41.7570960",
-		stopLan: "-72.703676"
-	}, {
-		id: "12296",
-		name: "Parkville Station Platform B",
-		stopLat: "41.7570870",
-		stopLan: "-72.703906"
-	}, {
-		id: "12297",
-		name: "Kane St Station Platform B",
-		stopLat: "41.7504610",
-		stopLan: "-72.709077"
-	}, {
-		id: "12298",
-		name: "Flatbush Ave Station Platform B",
-		stopLat: "41.7411910",
-		stopLan: "-72.716347"
-	}, {
-		id: "12299",
-		name: "Elmwood Station Platform B",
-		stopLat: "41.7305090",
-		stopLan: "-72.724864"
-	}, {
-		id: "12300",
-		name: "Newington Junction Station Platform B",
-		stopLat: "41.7162100",
-		stopLan: "-72.736410"
-	}, {
-		id: "12301",
-		name: "Cedar St Station Platform B",
-		stopLat: "41.6958540",
-		stopLan: "-72.753853"
-	}, {
-		id: "12302",
-		name: "East St. Station Platform B",
-		stopLat: "41.6876170",
-		stopLan: "-72.758666"
-	}, {
-		id: "12303",
-		name: "East Main St Station Platform B",
-		stopLat: "41.6715000",
-		stopLan: "-72.766279"
-	}, {
-		id: "12305",
-		name: "New Britain Station G",
-		stopLat: "41.6684040",
-		stopLan: "-72.779130"
-	}, {
-		id: "12383",
-		name: "Sigourant St Lot",
-		stopLat: "41.7647200",
-		stopLan: "-72.694831"
-	}, {
-		id: "12482",
-		name: "Cedar St Lot",
-		stopLat: "41.6961490",
-		stopLan: "-72.753925"
-	}, {
-		id: "12483",
-		name: "Cedar St. Lot",
-		stopLat: "41.6961580",
-		stopLan: "-72.754615"
-	}, {
-		id: "12562",
-		name: "New Britain Station Bay L",
-		stopLat: "41.6686730",
-		stopLan: "-72.780340"
-	}, {
-		id: "12563",
-		name: "New Britain Station Bay B",
-		stopLat: "41.6687530",
-		stopLan: "-72.779529"
-	}, {
-		id: "12586",
-		name: "New Britain Bay R Express",
-		stopLat: "41.6682970",
-		stopLan: "-72.778852"
-	}, {
-		id: "12587",
-		name: "New Britain Station S Express",
-		stopLat: "41.6689230",
-		stopLan: "-72.780049"
-	}, {
-		id: "12589",
-		name: "New Britain Station J",
-		stopLat: "41.6685390",
-		stopLan: "-72.779735"
-	}, {
-		id: "12618",
-		name: "New Britain Station D",
-		stopLat: "41.6686190",
-		stopLan: "-72.778948"
-	},
+var _fastrakBusStops = [
+                {
+                    "stop_id": 7984,
+                    "stop_name": "Fenn Rd and CTFastrak",
+                    "longitude": -72.756902,
+                    "latitude": 41.696115
+                },
+                {
+                    "stop_id": 12283,
+                    "stop_name": "CTFastrak and East Main St Station",
+                    "longitude": -72.766231,
+                    "latitude": 41.671482
+                },
+                {
+                    "stop_id": 12284,
+                    "stop_name": "CTFastrak and East St Station",
+                    "longitude": -72.758581,
+                    "latitude": 41.687564
+                },
+                {
+                    "stop_id": 12285,
+                    "stop_name": "CTFastrak and Cedar St Station",
+                    "longitude": -72.753671,
+                    "latitude": 41.695952
+                },
+                {
+                    "stop_id": 12286,
+                    "stop_name": "CTFastrak and Newington Junction Station",
+                    "longitude": -72.736253,
+                    "latitude": 41.716183
+                },
+                {
+                    "stop_id": 12287,
+                    "stop_name": "CTFastrask and Elmwood Station",
+                    "longitude": -72.724792,
+                    "latitude": 41.730473
+                },
+                {
+                    "stop_id": 12288,
+                    "stop_name": "CTFastrak and Flatbush Ave Station",
+                    "longitude": -72.71648,
+                    "latitude": 41.741709
+                },
+                {
+                    "stop_id": 12289,
+                    "stop_name": "New Park Ave and Kane St Station",
+                    "longitude": -72.708981,
+                    "latitude": 41.750416
+                },
+                {
+                    "stop_id": 12290,
+                    "stop_name": "CTFastrak and Park St Station",
+                    "longitude": -72.703676,
+                    "latitude": 41.757096
+                },
+                {
+                    "stop_id": 12291,
+                    "stop_name": "CT Fastrak and Sigourney St Station",
+                    "longitude": -72.694601,
+                    "latitude": 41.764326
+                },
+                {
+                    "stop_id": 12295,
+                    "stop_name": "CT Fastrak and Sigourney St Station",
+                    "longitude": -72.695062,
+                    "latitude": 41.764211
+                },
+                {
+                    "stop_id": 12296,
+                    "stop_name": "CTFastrak and Parkville Station",
+                    "longitude": -72.703906,
+                    "latitude": 41.757087
+                },
+                {
+                    "stop_id": 12297,
+                    "stop_name": "CTFastrak and Kane St Station",
+                    "longitude": -72.709077,
+                    "latitude": 41.750461
+                },
+                {
+                    "stop_id": 12298,
+                    "stop_name": "CTFastrak and Flatbush Ave Station",
+                    "longitude": -72.716347,
+                    "latitude": 41.741191
+                },
+                {
+                    "stop_id": 12299,
+                    "stop_name": "CTFastrak and Elmwood Station",
+                    "longitude": -72.724864,
+                    "latitude": 41.730464
+                },
+                {
+                    "stop_id": 12300,
+                    "stop_name": "CTFastrak and Newington Junction Station",
+                    "longitude": -72.736314,
+                    "latitude": 41.716263
+                },
+                {
+                    "stop_id": 12302,
+                    "stop_name": "CTFastrak and East St Station",
+                    "longitude": -72.758702,
+                    "latitude": 41.687582
+                },
+                {
+                    "stop_id": 12305,
+                    "stop_name": "CTFastrak and New Britain Station G",
+                    "longitude": -72.77913,
+                    "latitude": 41.668404
+                },
+                {
+                    "stop_id": 12320,
+                    "stop_name": "Fenn Rd and Opp CTFastrak",
+                    "longitude": -72.757302,
+                    "latitude": 41.695338
+                },
+                {
+                    "stop_id": 12383,
+                    "stop_name": "CTFastrak and Sigourant St Lot",
+                    "longitude": -72.694831,
+                    "latitude": 41.76472
+                },
+                {
+                    "stop_id": 12384,
+                    "stop_name": "CT Fastrak and Sigourney Street Lot",
+                    "longitude": -72.695134,
+                    "latitude": 41.764434
+                },
+                {
+                    "stop_id": 12385,
+                    "stop_name": "Temple St and Grove St",
+                    "longitude": -72.923996,
+                    "latitude": 41.310826
+                },
+                {
+                    "stop_id": 12441,
+                    "stop_name": "New Park Ave and Opp CTFastrak",
+                    "longitude": -72.724863,
+                    "latitude": 41.731689
+                },
+                {
+                    "stop_id": 12442,
+                    "stop_name": "New Park Ave and CTFastrak",
+                    "longitude": -72.724645,
+                    "latitude": 41.731617
+                },
+                {
+                    "stop_id": 12482,
+                    "stop_name": "CTFastrak and Cedar St Lot",
+                    "longitude": -72.753998,
+                    "latitude": 41.69614
+                },
+                {
+                    "stop_id": 12483,
+                    "stop_name": "CTFastrak and Cedar St Lot",
+                    "longitude": -72.754554,
+                    "latitude": 41.696301
+                },
+                {
+                    "stop_id": 12562,
+                    "stop_name": "CTFastrak and New Britain Station L",
+                    "longitude": -72.78034,
+                    "latitude": 41.668673
+                },
+                {
+                    "stop_id": 12563,
+                    "stop_name": "CTFastrak and New Britain Station B",
+                    "longitude": -72.779529,
+                    "latitude": 41.668753
+                },
+                {
+                    "stop_id": 12570,
+                    "stop_name": "New Britain Ave and Hooker St",
+                    "longitude": -72.85622,
+                    "latitude": 41.675041
+                },
+                {
+                    "stop_id": 12586,
+                    "stop_name": "CTFastrak and New Britain Bay R Express",
+                    "longitude": -72.778852,
+                    "latitude": 41.668297
+                },
+                {
+                    "stop_id": 12587,
+                    "stop_name": "CTFastrak and New Britain Station S Express",
+                    "longitude": -72.780049,
+                    "latitude": 41.668923
+                },
+                {
+                    "stop_id": 12589,
+                    "stop_name": "CTFastrak and New Britain Station J",
+                    "longitude": -72.779735,
+                    "latitude": 41.668539
+                },
+                {
+                    "stop_id": 12618,
+                    "stop_name": "CTFastrak and New Britain Station D",
+                    "longitude": -72.778948,
+                    "latitude": 41.668619
+                },
 ];
 
 var _fromLocationAutoComplete;
@@ -335,50 +408,97 @@ function initGoogleComponents() {
 									var text = kmlEvent.featureData.name + '<br>' + kmlEvent.featureData.description;
 									//showInContentWindow(text);
 									console.log(text);
-									});
-	//loadKmlLayer('https://drive.google.com/uc?export=download&id=0B23t31esDVFRcVBaUGk5N3dRbVU', _map);
-
-	initGoogleAutoComplete();
-
-	var mapView = new google.maps.InfoWindow({
-			map: _map
 		});
 
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(function (position) {
-			_usersCurrentLocation = position;
-		
-			
-			var currentPosition = {
-				lat: parseFloat(position.coords.latitude),
-				lng: parseFloat(position.coords.longitude)
-			};
+		initGoogleAutoComplete();
 
-			mapView.setPosition(currentPosition);
-			mapView.setContent('You are here.');
-		
-			var circle = new google.maps.Circle({
-					center: currentPosition,
-					radius: position.coords.accuracy
-				});
+		function showInContentWindow(text) {
+		    var contentWindow = document.getElementById('divDirections')
+		    contentWindow.innerHTML = text;
+		};
 
-			_fromLocationAutoComplete.setBounds(circle.getBounds());
-			_toLocationAutoComplete.setBounds(circle.getBounds());
-			//_map.setCenter(position);
-
-		}, function () {
-			handleLocationError(true, mapView, map.getCenter());
+		_map.data.setStyle(function (feature) {
+		    return ({
+		        icon: 'Bus_stop.png'
+		    })
 		});
-	} else {
-		// Browser doesn't support Geolocation
-		handleLocationError(false, mapView, map.getCenter());
-	}
 
-}
+    //Show approaching buses when a stop is clickedObject.keys
+		_map.data.loadGeoJson('https://kvn-dly.github.io/fastrakStops.json');
+		_map.data.addListener('click', function (event) {
+		    document.getElementById('divDirections').innerHTML = ""
+		    divtext = "";
+		    var i;
 
-function findNearestBusStop(lattitude, longitude) {
-	displayWalkRouteOnMap(lattitude, longitude, parseFloat(_fastrakBusStops[0].stopLat), parseFloat(_fastrakBusStops[0].stopLan));
-}
+		    for (i = 0; i < Object.keys(trips["entity"]).length; i++) {
+		        var j;
+		        for (j = 0; j < Object.keys(trips["entity"][i].trip_update.stop_time_update).length; j++) {
+		            if (trips["entity"][i].trip_update.stop_time_update[j].stop_id == event.feature.getProperty('stop_id')) {
+		                var d = new Date(1970, 0, 1);
+		                var t;
+		                d.setSeconds(trips["entity"][i].trip_update.stop_time_update[j].arrival.time)
+		                d.setHours(d.getHours() - 5)
+		                t = d.toLocaleTimeString()
+		                divtext = divtext + '<br>' + trips["entity"][i].trip_update.vehicle.label + " : " + t
+		            }
+		        }
+		    }
+
+		    document.getElementById('content-header').innerHTML = event.feature.getProperty('stop_name');
+		    document.getElementById('divDirections').innerHTML = divtext;
+		    getTrips();
+		    getBusLocations();
+		    getAlerts();
+		   
+		});
+		getTrips();
+
+		var mapView = new google.maps.InfoWindow({
+		    map: _map
+		});
+
+		if (navigator.geolocation) {
+		    navigator.geolocation.getCurrentPosition(function (position) {
+		        _usersCurrentLocation = position;
+
+
+		        var currentPosition = {
+		            lat: parseFloat(position.coords.latitude),
+		            lng: parseFloat(position.coords.longitude)
+		        };
+
+		        mapView.setPosition(currentPosition);
+		        mapView.setContent('You are here.');
+
+		        var circle = new google.maps.Circle({
+		            center: currentPosition,
+		            radius: position.coords.accuracy
+		        });
+
+		        _fromLocationAutoComplete.setBounds(circle.getBounds());
+		        _toLocationAutoComplete.setBounds(circle.getBounds());
+		        //_map.setCenter(position);
+
+		    }, function () {
+		        handleLocationError(true, mapView, map.getCenter());
+		    });
+		} else {
+		    // Browser doesn't support Geolocation
+		    handleLocationError(false, mapView, map.getCenter());
+		}
+
+    }
+
+    function findNearestBusStop(lattitude, longitude) {
+        displayWalkRouteOnMap(lattitude, longitude, parseFloat(_fastrakBusStops[0].stopLat), parseFloat(_fastrakBusStops[0].stopLan));
+    }
+
+    function getTrips() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://65.213.12.244/realtimefeed/tripupdate/tripupdates.json", true);
+        xhr.onload = function () { trips = eval("(" + xhr.response + ")") }
+        xhr.send()
+    }
 
 function displayBusRouteOnMap(fromLatitude, fromLongitude, toLatitude, toLongitude){
 	debugger;
@@ -401,3 +521,4 @@ function displayBusRouteOnMap(fromLatitude, fromLongitude, toLatitude, toLongitu
 		}
 	});
 }
+
