@@ -1,6 +1,7 @@
 var _map;
 var _displayDirections;
 var _directionService;
+var trips;
 var _fastrakBusStops = [
                 {
                     "stop_id": 7984,
@@ -199,8 +200,9 @@ var _fastrakBusStops = [
                     "stop_name": "CTFastrak and New Britain Station D",
                     "longitude": -72.778948,
                     "latitude": 41.668619
-                },
-];
+                }
+];  
+
 
 var _fromLocationAutoComplete;
 var _toLocationAutoComplete;
@@ -314,7 +316,7 @@ $(function () {
 	});
 
 	$("#btnSubmit").click(function(){
-		/*var nearestBusStop = calculateClosestStop(_usersCurrentLocation.coords.latitude,
+		var nearestBusStop = calculateClosestStop(_usersCurrentLocation.coords.latitude,
 _usersCurrentLocation.coords.longitude,_fastrakBusStops);
 
 		console.log(nearestBusStop);
@@ -323,14 +325,14 @@ _usersCurrentLocation.coords.longitude,_fastrakBusStops);
 			_usersCurrentLocation.coords.longitude,
 			nearestBusStop.stopLat,
 			nearestBusStop.stopLan);
-		*/
+		/*
 		displayBusRouteOnMap(
 		_fromLocationAutoComplete.getPlace().geometry.location.lat(),
 		_fromLocationAutoComplete.getPlace().geometry.location.lng(),
 		_toLocationAutoComplete.getPlace().geometry.location.lat(),
 		_toLocationAutoComplete.getPlace().geometry.location.lng()
 		);
-		
+		*/
 	});
 });
 
@@ -393,112 +395,115 @@ function initGoogleComponents() {
 		new google.maps.Polygon({
 			paths: fastTrackBoundryCoordinates
 		});
-
+	
 	// ToDo: Change the URL
 	var ctfastrak = new google.maps.KmlLayer({
 			map: _map,
 			url: 'https://drive.google.com/uc?export=download&id=0BzSh5RLL0GhUNHZ0ZFhKWU9yZWM',
 			preserveViewport: true,
-			suppressInfoWindows: false
+			suppressInfoWindows: true
 		});
-
-	  debugger;
-		ctfastrak.addListener('click', function(kmlEvent){
-									//document.getElementById('content-header').innerHTML = ""
-									var text = kmlEvent.featureData.name + '<br>' + kmlEvent.featureData.description;
+   
+	  //debugger;
+		//ctfastrak.addListener('click', function(kmlEvent){
+		                         //  document.getElementById('divDirections').innerHTML = ""
+									//var text = kmlEvent.featureData.name + '<br>' + kmlEvent.featureData.description;
 									//showInContentWindow(text);
-									console.log(text);
-		});
-
-		initGoogleAutoComplete();
-
+									
+		//});
+     
 		function showInContentWindow(text) {
 		    var contentWindow = document.getElementById('divDirections')
 		    contentWindow.innerHTML = text;
 		};
-
+    		
 		_map.data.setStyle(function (feature) {
 		    return ({
 		        icon: 'Bus_stop.png'
 		    })
 		});
-
+		'Bus_stop.png'
     //Show approaching buses when a stop is clickedObject.keys
 		_map.data.loadGeoJson('https://kvn-dly.github.io/fastrakStops.json');
-		_map.data.addListener('click', function (event) {
+		_map.data.addListener('click', function(event){
 		    document.getElementById('divDirections').innerHTML = ""
 		    divtext = "";
 		    var i;
-
-		    for (i = 0; i < Object.keys(trips["entity"]).length; i++) {
+		    										
+		    for(i=0; i < Object.keys(trips["entity"]).length;i++){
 		        var j;
-		        for (j = 0; j < Object.keys(trips["entity"][i].trip_update.stop_time_update).length; j++) {
-		            if (trips["entity"][i].trip_update.stop_time_update[j].stop_id == event.feature.getProperty('stop_id')) {
-		                var d = new Date(1970, 0, 1);
+		        for(j=0; j < Object.keys(trips["entity"][i].trip_update.stop_time_update).length;j++){
+		            if (trips["entity"][i].trip_update.stop_time_update[j].stop_id == event.feature.getProperty('stop_id')){
+		                var d = new Date(1970,0,1);
 		                var t;
 		                d.setSeconds(trips["entity"][i].trip_update.stop_time_update[j].arrival.time)
 		                d.setHours(d.getHours() - 5)
 		                t = d.toLocaleTimeString()
-		                divtext = divtext + '<br>' + trips["entity"][i].trip_update.vehicle.label + " : " + t
-		            }
-		        }
+		                divtext = divtext + '<br>' + trips["entity"][i].trip_update.vehicle.label + " : "+ t}}		
 		    }
-
-		    document.getElementById('content-header').innerHTML = event.feature.getProperty('stop_name');
+										
+     	    document.getElementById('divDirections').innerHTML = event.feature.getProperty('stop_name');
 		    document.getElementById('divDirections').innerHTML = divtext;
 		    getTrips();
 		    getBusLocations();
 		    getAlerts();
-		   
+		    initGoogleAutoComplete();
 		});
 		getTrips();
 
-		var mapView = new google.maps.InfoWindow({
-		    map: _map
+	var mapView = new google.maps.InfoWindow({
+			map: _map
 		});
 
-		if (navigator.geolocation) {
-		    navigator.geolocation.getCurrentPosition(function (position) {
-		        _usersCurrentLocation = position;
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function (position) {
+			_usersCurrentLocation = position;
+		
+			
+			var currentPosition = {
+				lat: parseFloat(position.coords.latitude),
+				lng: parseFloat(position.coords.longitude)
+			};
 
+			mapView.setPosition(currentPosition);
+			mapView.setContent('You are here.');
+		
+			var circle = new google.maps.Circle({
+					center: currentPosition,
+					radius: position.coords.accuracy
+				});
 
-		        var currentPosition = {
-		            lat: parseFloat(position.coords.latitude),
-		            lng: parseFloat(position.coords.longitude)
-		        };
+			_fromLocationAutoComplete.setBounds(circle.getBounds());
+			_toLocationAutoComplete.setBounds(circle.getBounds());
+			//_map.setCenter(position);
 
-		        mapView.setPosition(currentPosition);
-		        mapView.setContent('You are here.');
+		}, function () {
+			handleLocationError(true, mapView, map.getCenter());
+		});
+	} else {
+		// Browser doesn't support Geolocation
+		handleLocationError(false, mapView, map.getCenter());
+	}
 
-		        var circle = new google.maps.Circle({
-		            center: currentPosition,
-		            radius: position.coords.accuracy
-		        });
+}
 
-		        _fromLocationAutoComplete.setBounds(circle.getBounds());
-		        _toLocationAutoComplete.setBounds(circle.getBounds());
-		        //_map.setCenter(position);
+function getTrips() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://65.213.12.244/realtimefeed/tripupdate/tripupdates.json", true);
+    xhr.onload = function () { trips = eval("(" + xhr.response + ")") }
+    xhr.send()
+}
 
-		    }, function () {
-		        handleLocationError(true, mapView, map.getCenter());
-		    });
-		} else {
-		    // Browser doesn't support Geolocation
-		    handleLocationError(false, mapView, map.getCenter());
-		}
+function getAlerts() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://65.213.12.244/realtimefeed/alert/alerts.json", true);
+    xhr.onload = function () { alerts = eval("(" + xhr.response + ")") }
+    xhr.send()
+}
 
-    }
-
-    function findNearestBusStop(lattitude, longitude) {
-        displayWalkRouteOnMap(lattitude, longitude, parseFloat(_fastrakBusStops[0].stopLat), parseFloat(_fastrakBusStops[0].stopLan));
-    }
-
-    function getTrips() {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://65.213.12.244/realtimefeed/tripupdate/tripupdates.json", true);
-        xhr.onload = function () { trips = eval("(" + xhr.response + ")") }
-        xhr.send()
-    }
+function findNearestBusStop(lattitude, longitude) {
+	displayWalkRouteOnMap(lattitude, longitude, parseFloat(_fastrakBusStops[0].stopLat), parseFloat(_fastrakBusStops[0].stopLan));
+}
 
 function displayBusRouteOnMap(fromLatitude, fromLongitude, toLatitude, toLongitude){
 	debugger;
@@ -521,4 +526,6 @@ function displayBusRouteOnMap(fromLatitude, fromLongitude, toLatitude, toLongitu
 		}
 	});
 }
+
+
 
